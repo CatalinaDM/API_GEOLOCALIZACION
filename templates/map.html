@@ -44,10 +44,19 @@
             </div>
         </div>
 
+        {% if error %}
+        <div class="error-card">
+            <div class="error-message">
+                <span class="icon"></span> {{ error }}
+            </div>
+            <p>Intenta con otro nombre o verifica la ortografía</p>
+        </div>
+        {% endif %}
+
         {% if lat %}
         <div class="card">
             <div class="location-badge">
-                <span class="icon">📍</span> {{ nombre }}
+                <span class="icon"></span> {{ nombre }}
             </div>
 
             <div class="map-wrapper">
@@ -57,35 +66,26 @@
             <div class="map-info">
                 📊 Coordenadas: Lat {{ lat }} | Lon {{ lon }}
             </div>
-
-              {% if error %}
-        <div class="error-card">
-            <div class="error-message">
-                <span"></span> {{ error }}
-            </div>
-            <p>Intenta con otro nombre o verifica la ortografía</p>
-        </div>
-        {% endif %}
         </div>
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <script>
-            var map = L.map('map').setView([{{ lat }}, { { lon } }], 13);
+       <script>
+    var map = L.map('map').setView([{{ lat }}, {{ lon }}], 13);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-            var customIcon = L.divIcon({
-                html: '<div style="font-size: 40px;">📍</div>',
-                iconSize: [40, 40],
-                className: 'custom-marker'
-            });
+    var customIcon = L.divIcon({
+        html: '<div style="font-size: 40px;">📍</div>',
+        iconSize: [40, 40],
+        className: 'custom-marker'
+    });
 
-            L.marker([{{ lat }}, {{ lon }}], { icon: customIcon }).addTo(map)
-                .bindPopup('<strong>{{ nombre }}</strong>')
-                .openPopup();
-        </script>
+    L.marker([{{ lat }}, {{ lon }}], { icon: customIcon }).addTo(map)
+        .bindPopup('<strong>{{ nombre }}</strong>')
+        .openPopup();
+</script>
         {% endif %}
 
         <div class="footer">
@@ -96,3 +96,4 @@
 </body>
 
 </html>
+

@@ -52,7 +52,6 @@ body {
     display: inline-block;
     background: white;
     padding: 30px 50px;
-    position: center;
     border-radius: 25px;
     box-shadow: var(--shadow-xl);
     margin-bottom: 30px;
