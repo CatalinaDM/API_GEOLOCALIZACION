@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UbicaMap - Buscador de Lugares</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+
+<body>
+        <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>Ubica<span class="map-icon">📍</span>Map</h1>
+            </div>
+            <p class="subtitle"> Descubre cualquier lugar del mundo con un solo clic</p>
+        </div>
+        <div class="nav-breadcrumb">
+            <a href="/"> Inicio</a>
+            <span>→</span>
+            <span> Buscador</span>
+        </div>
+
+        <div class="card">
+            <h2><span class="icon">🔍</span> Buscador de Ubicaciones</h2>
+
+            <form method="POST" action="/buscar" class="search-form">
+                <label for="lugar">¿Qué lugar quieres explorar?</label>
+                <div class="search-container">
+                    <input type="text" id="lugar" name="lugar" placeholder="Ej: París, Torre Eiffel, Times Square..."
+                        required autocomplete="off">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="icon"></span> Buscar
+                    </button>
+                </div>
+            </form>
+
+            <div class="btn-group">
+                <a href="/" class="btn btn-secondary">
+                    <span class="icon"></span> Volver al Inicio
+                </a>
+            </div>
+        </div>
+
+        {% if lat %}
+        <div class="card">
+            <div class="location-badge">
+                <span class="icon">📍</span> {{ nombre }}
+            </div>
+
+            <div class="map-wrapper">
+                <div id="map"></div>
+            </div>
+
+            <div class="map-info">
+                📊 Coordenadas: Lat {{ lat }} | Lon {{ lon }}
+            </div>
+
+              {% if error %}
+        <div class="error-card">
+            <div class="error-message">
+                <span"></span> {{ error }}
+            </div>
+            <p>Intenta con otro nombre o verifica la ortografía</p>
+        </div>
+        {% endif %}
+        </div>
+
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script>
+            var map = L.map('map').setView([{{ lat }}, { { lon } }], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            var customIcon = L.divIcon({
+                html: '<div style="font-size: 40px;">📍</div>',
+                iconSize: [40, 40],
+                className: 'custom-marker'
+            });
+
+            L.marker([{{ lat }}, {{ lon }}], { icon: customIcon }).addTo(map)
+                .bindPopup('<strong>{{ nombre }}</strong>')
+                .openPopup();
+        </script>
+        {% endif %}
+
+        <div class="footer">
+            <p>Hecho por el equipo de UbicaMap | Datos de <a href="https://www.openstreetmap.org"
+                    target="_blank">OpenStreetMap</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

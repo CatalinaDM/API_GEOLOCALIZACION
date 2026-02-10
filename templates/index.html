@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UbicaMap - Explora el Mundo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>Ubica<span class="map-icon">📍</span>Map</h1>
+            </div>
+            <p class="subtitle"> Descubre cualquier lugar del mundo con un solo clic</p>
+        </div>
+
+        <div class="card">
+            <h2>🌍 ¡Bienvenido Explorador!</h2>
+            <p>Con UbicaMap puedes encontrar y visualizar cualquier ubicación del planeta. 
+               Desde ciudades icónicas hasta lugares remotos, tu próxima aventura está a solo una búsqueda de distancia.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <strong>Búsqueda Global</strong>
+                    <p>Encuentra cualquier lugar del mundo al instante</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🗺️</span>
+                    <strong>Mapas Interactivos</strong>
+                    <p>Visualiza ubicaciones en tiempo real</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📍</span>
+                    <strong>Ubicación Precisa</strong>
+                    <p>Coordenadas geográficas exactas</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <strong>Súper Rápido</strong>
+                    <p>Resultados instantáneos sin demoras</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="/buscar" class="btn btn-primary">
+                    <span class="icon"></span> Comenzar a Explorar
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Realizado por el equipo de UbicaMap | Datos de <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
